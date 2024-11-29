@@ -186,7 +186,7 @@ roulette.resizable(False, False)
 roulette.config(bg="lightgrey")
 
 # Charger les images
-photo_revolver = charger_image("resources/chargeur.jpg")
+photo_revolver = charger_image("resources/revolver.jpg")
 photo_tombe = charger_image("resources/tombes_dessins.jpg")
 photo_chargeur = charger_image("resources/chargeur.jpg")
 # Créer un label pour les images
