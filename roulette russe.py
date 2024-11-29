@@ -8,9 +8,9 @@ import pygame
 import os
 
 # Constantes
-son_clic_souris = "resources\clic_souris.mp3"
-son_tir = "resources\son_tir.mp3"
-son_chargement = "resources\son_chargement.mp3"
+son_clic_souris = "resources/clic_souris.mp3"
+son_tir = "resources/son_tir.mp3"
+son_chargement = "resources/son_chargement.mp3"
 
 # Variables globales
 score = 0
