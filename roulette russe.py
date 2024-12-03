@@ -7,10 +7,18 @@ import time
 import pygame
 import os
 
-# Constantes
-son_clic_souris = "resources/clic_souris.mp3"
-son_tir = "resources/son_tir.mp3"
-son_chargement = "resources/son_chargement.mp3"
+# Constantes des emplacaments des fichers
+repertoire_du_projet= os.path.dirname(os.path.abspath(__file__))
+
+son_clic_souris=os.path.join(repertoire_du_projet, "resources/clic_souris.mp3")
+son_tir=os.path.join(repertoire_du_projet, "resources/son_tir.mp3")
+son_chargement=os.path.join(repertoire_du_projet, "resources/son_chargement.mp3")
+
+logo_jeu_path=os.path.join(repertoire_du_projet, "resources/balle_roulette.ico")
+
+image_revolver_path=os.path.join(repertoire_du_projet, "resources/revolver.jpg")
+image_chargeur_path=os.path.join(repertoire_du_projet, "resources/chargeur.jpg")
+image_tombes_dessins_path=os.path.join(repertoire_du_projet, "resources/tombes_dessins.jpg")
 
 # Variables globales
 score = 0
@@ -180,15 +188,15 @@ max_width = 390
 max_height = 400
 roulette = tk.Tk()
 roulette.title("Roulette Russe")
-roulette.iconbitmap('resources/balle_roulette.ico')
+roulette.iconbitmap(logo_jeu_path)
 roulette.geometry("300x400")
 roulette.resizable(False, False)
 roulette.config(bg="lightgrey")
 
 # Charger les images
-photo_revolver = charger_image("resources/revolver.jpg")
-photo_tombe = charger_image("resources/tombes_dessins.jpg")
-photo_chargeur = charger_image("resources/chargeur.jpg")
+photo_revolver = charger_image(image_revolver_path)
+photo_tombe = charger_image(image_tombes_dessins_path)
+photo_chargeur = charger_image(image_chargeur_path)
 # Créer un label pour les images
 label_revolver = tk.Label(roulette, image=photo_revolver, bg="lightgrey")
 label_tombe = tk.Label(roulette, image=photo_tombe, bg="lightgrey")
