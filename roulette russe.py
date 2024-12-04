@@ -6,6 +6,9 @@ from PIL import Image, ImageTk
 import time
 import pygame
 import os
+import json
+
+liste = []
 
 # Constantes des emplacaments des fichers
 repertoire_du_projet= os.path.dirname(os.path.abspath(__file__))
@@ -20,13 +23,23 @@ image_revolver_path=os.path.join(repertoire_du_projet, "resources/revolver.jpg")
 image_chargeur_path=os.path.join(repertoire_du_projet, "resources/chargeur.jpg")
 image_tombes_dessins_path=os.path.join(repertoire_du_projet, "resources/tombes_dessins.jpg")
 
+ficher_json=os.path.join(repertoire_du_projet, "bestscore.json")
+
+if os.path.exists(ficher_json):
+    with open(ficher_json, 'r', encoding='utf-8') as f:
+        donnees = json.load(f)
+        score_record = donnees.get("score_record", 0)
+else:
+    score_record = 0
+    donnees = {"score_record": score_record}
+    with open(ficher_json, 'w', encoding='utf-8') as f:
+        json.dump(donnees, f, ensure_ascii=False, indent=4)
+
 # Variables globales
 score = 0
-score_record =0
 nb_balles_mortelles =1
 nb_balles_blanches =6
 son_activé=True
-
 son_lock = threading.Lock()
 pygame.mixer.init()
 
@@ -55,6 +68,11 @@ def jouer_son(fichier_audio):
 # Fonction pour jouer un son dans un thread
 def jouer_son_dans_thread(fichier_audio):
     threading.Thread(target=jouer_son, args=(fichier_audio,), daemon=True).start()
+
+def sauvegarder_score_record():
+    donnees["score_record"] = score_record
+    with open(ficher_json, 'w', encoding='utf-8') as f:
+        json.dump(donnees, f, ensure_ascii=False, indent=4)
 
 def charger_image(image_path):# Charger et redimensionner une image
     image = Image.open(image_path)
@@ -108,6 +126,7 @@ def tirer():# Fonction principale pour simuler le tir
         if score >= score_record:
             score_record = score
             score_record_label.config(text="Score record: " + str(score_record))
+            sauvegarder_score_record()
         score_record_label.place(x=170, y=20)
 
 def rejouer():#rejouer une partie
